@@ -1,4 +1,9 @@
-import uasyncio as asyncio
+"""HTTP Framework from: https://github.com/wybiral/micropython-aioweb"""
+
+try:
+    import uasyncio as asyncio
+except:
+    import asyncio
 from hashlib import sha1
 from binascii import b2a_base64
 import struct
@@ -89,6 +94,7 @@ class App:
         try:
             await _parse_request(r, w)
         except:
+            w.close()
             await w.wait_closed()
             return
         for path, methods, handler in self.handlers:
@@ -97,9 +103,11 @@ class App:
             if r.method not in methods:
                 continue
             await handler(r, w)
+            w.close()
             await w.wait_closed()
             return
-        await w.awrite(b'HTTP/1.0 404 Not Found\r\n\r\nNot Found')
+        w.write(b'HTTP/1.0 404 Not Found\r\n\r\nNot Found')
+        w.close()
         await w.wait_closed()
 
     async def serve(self):
