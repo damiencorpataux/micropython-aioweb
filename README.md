@@ -10,8 +10,9 @@ A very minimal asyncio web framework for MicroPython. Doesn't come with all the 
 * supports Server-Sent Events!
 
 ## Rationale
-Continue the work of Davy Wybiral and its minimalistic mindset, so everything must be really minimalistic!
-Forked from https://github.com/wybiral/micropython-aioweb to rework branch `main` with 1 commit per version.
+[`micropython-uaioweb`](https://github.com/damiencorpataux/micropython-uaioweb) is a packaged version of [`micropython-aioweb`](https://github.com/wybiral/micropython-aioweb), an amazing minimal and functional HTTP toolkit for micropython by Davy Wybiral.
+
+This project aims at releasing the library on [PyPI](https://pypi.org/project/micropython-uaioweb/) by forking and reworking branch `main` with 1 commit per version.
 
 ## Examples
 ### Basic "Hello world!"
