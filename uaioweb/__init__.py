@@ -109,7 +109,7 @@ class App:
 class WebSocket:
 
     HANDSHAKE_KEY = b'258EAFA5-E914-47DA-95CA-C5AB0DC85B11'
-    
+
     OP_TYPES = {
         0x0: 'cont',
         0x1: 'text',

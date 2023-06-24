@@ -1,4 +1,4 @@
-# micropython-aioweb
+# micropython-uaioweb
 A very minimal asyncio web framework for MicroPython. Doesn't come with all the bells and whistles you might want out of a serious web framework but the goal is just to make asyncio HTTP applications in MicroPython as simple and efficient as possible.
 
 ## Current features
@@ -8,6 +8,11 @@ A very minimal asyncio web framework for MicroPython. Doesn't come with all the 
 * parses http request line, headers, and query strings
 * supports WebSockets!
 * supports Server-Sent Events!
+
+## Rationale
+[`micropython-uaioweb`](https://github.com/damiencorpataux/micropython-uaioweb) is a packaged version of [`micropython-aioweb`](https://github.com/wybiral/micropython-aioweb), an amazing minimal and functional HTTP toolkit for micropython by Davy Wybiral.
+
+This project aims at releasing the library on [PyPI](https://pypi.org/project/micropython-uaioweb/) by forking and reworking branch `main` with 1 commit per version.
 
 ## Examples
 ### Basic "Hello world!"
