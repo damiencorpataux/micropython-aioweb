@@ -1,13 +1,7 @@
-import network
-import web
-import uasyncio as asyncio
+import uaioweb
+from uaioweb import asyncio
 
-# access point credentials
-AP_SSID = 'WebSocket AP'
-AP_PASSWORD = 'donthackmebro'
-AP_AUTHMODE = network.AUTH_WPA_WPA2_PSK
-
-app = web.App(host='0.0.0.0', port=80)
+app = uaioweb.App(host='0.0.0.0', port=80)
 
 # root route handler
 @app.route('/')
@@ -47,7 +41,7 @@ WS_CLIENTS = set()
 async def ws_handler(r, w):
     global WS_CLIENTS
     # upgrade connection to WebSocket
-    ws = await web.WebSocket.upgrade(r, w)
+    ws = await uaioweb.WebSocket.upgrade(r, w)
     # add current client to set
     WS_CLIENTS.add(ws)
     while True:
@@ -65,13 +59,23 @@ async def ws_handler(r, w):
     # remove current client from set
     WS_CLIENTS.discard(ws)
 
-# Create WiFi access point
-wifi = network.WLAN(network.AP_IF)
-wifi.active(True)
-wifi.config(essid=AP_SSID, password=AP_PASSWORD, authmode=AP_AUTHMODE)
-while wifi.active() == False:
-    pass
-print(wifi.ifconfig())
+# Start wifi (if applicable)
+try:
+    import network
+    # access point credentials
+    AP_SSID = 'Hello AP'
+    AP_PASSWORD = 'donthackmebro'
+    AP_AUTHMODE = network.AUTH_WPA_WPA2_PSK
+
+    # Create WiFi access point
+    wifi = network.WLAN(network.AP_IF)
+    wifi.active(True)
+    wifi.config(essid=AP_SSID, password=AP_PASSWORD, authmode=AP_AUTHMODE)
+    while wifi.active() == False:
+        pass
+    print(wifi.ifconfig())
+except ModuleNotFoundError:
+    pass  # running on Python
 
 # Start event loop and create server task
 loop = asyncio.get_event_loop()

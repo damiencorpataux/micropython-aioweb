@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setup(
     name='micropython-uaioweb',
-    version='0.0.2',
+    version='0.0.3',
     description='Minimal asyncio web server for HTTP and Websocket.',
     long_description=long_description,
     long_description_content_type="text/markdown",
