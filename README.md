@@ -17,10 +17,10 @@ This project aims at releasing the library on [PyPI](https://pypi.org/project/mi
 ## Examples
 ### Basic "Hello world!"
 ```python
-import web
-import uasyncio as asyncio
+import uaioweb
+from uaioweb import asyncio  # Note: compatibility between micropython and python.
 
-app = web.App(host='0.0.0.0', port=80)
+app = uaioweb.App(host='0.0.0.0', port=80)
 
 # root route handler
 @app.route('/')
@@ -44,7 +44,7 @@ loop.run_forever()
 @app.route('/', methods=['POST'])
 async def handler(r, w):
     body = await r.read(1024)
-    form = web.parse_qs(body.decode())
+    form = uaioweb.parse_qs(body.decode())
     name = form.get('name', 'world')
     # write http headers
     w.write(b'HTTP/1.0 200 OK\r\n')
@@ -78,7 +78,7 @@ async def ws_handler(r, w):
 @app.route('/events')
 async def ws_handler(r, w):
     # upgrade connection to text/event-stream
-    sse = await web.EventSource.upgrade(r, w)
+    sse = await uaioweb.EventSource.upgrade(r, w)
     count = 0
     while True:
         count += 1
