@@ -13,7 +13,7 @@ async def handler(r, w):
     count = 0
     while True:
         count += 1
-        w.write(bytes('<div>Hello world #{}!</div>'.format(count), encoding='utf-8'))
+        w.write(bytes('<div>Hello world #{}!</div>'.format(count), encoding='utf8'))
         try:
             await w.drain()
         except:
